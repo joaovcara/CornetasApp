@@ -1,0 +1,34 @@
+# .gitignore para projetos .NET
+# Build e publicação
+bin/
+obj/
+
+# Arquivos de usuário do Visual Studio
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Configurações locais
+.vs/
+
+# Logs, pacotes e dependências
+*.log
+*.nupkg
+packages/
+
+# Arquivos de configuração sensíveis
+appsettings.Development.json
+appsettings.Local.json
+
+# Outros
+*.DS_Store
+Thumbs.db
+
+# Ignorar arquivos gerados pelo sistema operacional
+*.swp
+*.bak
+*.tmp
+
+# Ignorar arquivos de publicação
+publish/
