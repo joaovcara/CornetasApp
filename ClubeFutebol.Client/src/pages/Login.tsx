@@ -20,40 +20,62 @@ export default function Login() {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Paper elevation={3} sx={{ padding: 4, marginTop: 8 }}>
-        <Typography variant="h5" gutterBottom>
-          Login
-        </Typography>
-
-        <Box display="flex" flexDirection="column" gap={2}>
-          <TextField
-            label="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            fullWidth
-          />
-
-          <TextField
-            label="Senha"
-            type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            fullWidth
-          />
-
-          {erro && (
-            <Typography color="error" fontSize={14}>
-              {erro}
+    <Box
+      sx={{
+        minHeight: '100vh',
+        backgroundColor: '#009d37ff',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        p: 2
+      }}
+    >
+      <Container maxWidth="sm">
+        <Paper elevation={3} sx={{ padding: 4 }}>
+          <Box sx={{ mb: 2, textAlign: 'center' }}>
+            <img
+              src="/img/icon.png" // Substitua pelo caminho correto da imagem
+              alt="Logo"
+              style={{ width: '100px', height: 'auto' }}
+            />
+            <Typography variant="h5" gutterBottom align="center">
+              Football Club App
             </Typography>
-          )}
+          </Box>
 
-          <Button variant="contained" onClick={handleLogin}>
-            Entrar
-          </Button>
-        </Box>
-      </Paper>
-    </Container>
+          <Typography variant="h5" gutterBottom align="center">
+            Login
+          </Typography>
+
+          <Box display="flex" flexDirection="column" gap={2}>
+            <TextField
+              label="Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              fullWidth
+            />
+
+            <TextField
+              label="Senha"
+              type="password"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              fullWidth
+            />
+
+            {erro && (
+              <Typography color="error" fontSize={14}>
+                {erro}
+              </Typography>
+            )}
+
+            <Button variant="contained" onClick={handleLogin}>
+              Entrar
+            </Button>
+          </Box>
+        </Paper>
+      </Container>
+    </Box>
   );
 }
