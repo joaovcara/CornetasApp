@@ -18,6 +18,8 @@ const Sidebar: FC = () => (
         width: drawerWidth,
         position: 'relative',
         height: '100%',
+        borderRight: 'none',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         top: 0,
       },
     }}

@@ -1,14 +1,14 @@
-
-import { createRoot } from 'react-dom/client';
-import { StrictMode } from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import App from './App';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
 import './global.css';
 
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  createRoot(rootElement).render(
-    <StrictMode>
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
       <App />
-    </StrictMode>
-  );
-}
+    </ThemeProvider>
+  </React.StrictMode>
+);

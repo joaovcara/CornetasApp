@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import {
   Button, Dialog, DialogActions, DialogContent, DialogTitle,
-  TextField, Typography, Container, Box, IconButton
+  TextField, Box, IconButton
 } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import api from '../api/api';
+import PageLayout from '../components/Layout/PageLayout';
 
 interface Membro {
   id: number;
@@ -83,9 +84,8 @@ export default function Membros() {
   ];
 
   return (
-    <Container sx={{ mt: 4 }}>
+    <PageLayout title="Membros">
       <Box display="flex" justifyContent="space-between" mb={2}>
-        <Typography variant="h5">Membros</Typography>
         <Button variant="contained" onClick={() => setOpen(true)}>
           Novo Membro
         </Button>
@@ -99,7 +99,12 @@ export default function Membros() {
           }
         }}
         pagination
-        pageSizeOptions={[]} // Remove "Rows per page" selector
+        rowSelection={false}
+        pageSizeOptions={[]}
+        localeText={{
+          paginationDisplayedRows: ({ from, to, count }) =>
+            `${from}–${to} de ${count !== -1 ? count : `mais de ${to}`}`,
+        }}
       />
 
       <Dialog open={open} onClose={() => setOpen(false)}>
@@ -124,6 +129,6 @@ export default function Membros() {
           <Button onClick={handleSalvar} variant="contained">Salvar</Button>
         </DialogActions>
       </Dialog>
-    </Container>
+    </PageLayout>
   );
 }
