@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import api from '../../services/api';
-import PageLayout from '../../components/Layout/Page/PageLayout';
+import PageLayout from '../../components/Layouts/Layout/Page/PageLayout';
 import styles from './Membros.styles';
 import GroupIcon from '@mui/icons-material/Group';
 
