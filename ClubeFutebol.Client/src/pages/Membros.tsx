@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import {
   Button, Dialog, DialogActions, DialogContent, DialogTitle,
-  TextField, Typography, Container, Box
+  TextField, Typography, Container, Box, IconButton
 } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import api from '../api/api';
 
 interface Membro {
@@ -50,22 +51,33 @@ export default function Membros() {
   }, []);
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 90 },
-    { field: 'nome', headerName: 'Nome', flex: 1 },
-    { field: 'email', headerName: 'Email', flex: 1 },
+    { field: 'id', headerName: 'ID', width: 90, disableColumnMenu: true },
+    { field: 'nome', headerName: 'Nome', flex: 1, disableColumnMenu: true },
+    { field: 'email', headerName: 'Email', flex: 1, disableColumnMenu: true },
     {
       field: 'acoes',
-      headerName: 'Ações',
-      width: 150,
+      headerName: '',
+      width: 100,
+      sortable: false,
+      filterable: false,
+      disableColumnMenu: true,
       renderCell: (params) => (
-        <Box display="flex" gap={1}>
-          <Button variant="outlined" size="small" onClick={() => handleEditar(params.row)}>
-            Editar
-          </Button>
-          <Button variant="outlined" color="error" size="small" onClick={() => handleExcluir(params.row.id)}>
-            Excluir
-          </Button>
-        </Box>
+        <>
+          <IconButton
+            size="small"
+            onClick={() => handleEditar(params.row)}
+            aria-label="editar"
+          >
+            <EditIcon />
+          </IconButton>
+          <IconButton
+            size="small"
+            onClick={() => handleExcluir(params.row.id)}
+            aria-label="excluir"
+          >
+            <DeleteIcon />
+          </IconButton>
+        </>
       ),
     },
   ];
@@ -78,13 +90,16 @@ export default function Membros() {
           Novo Membro
         </Button>
       </Box>
-
       <DataGrid
         rows={membros}
         columns={columns}
-        autoHeight
-        disableRowSelectionOnClick
-        pageSizeOptions={[5]}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 }
+          }
+        }}
+        pagination
+        pageSizeOptions={[]} // Remove "Rows per page" selector
       />
 
       <Dialog open={open} onClose={() => setOpen(false)}>
