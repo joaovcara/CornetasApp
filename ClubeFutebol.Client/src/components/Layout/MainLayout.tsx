@@ -8,11 +8,15 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => (
-  <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-    <Header />
-    <Box sx={{ display: 'flex', flex: 1 }}>
+  <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'row' }}>
+    <Box sx={{ flexShrink: 0, height: '100vh' }}>
       <Sidebar />
-      <Box component="main" sx={{ flex: 1, p: 3, bgcolor: 'background.default' }}>
+    </Box>
+    <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
+      <Box sx={{ flexShrink: 0 }}>
+        <Header />
+      </Box>
+      <Box component="main" sx={{ flex: 1, overflow: 'auto',backgroundColor: '#f5f5f5' }}>
         {children}
       </Box>
     </Box>
