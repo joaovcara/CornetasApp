@@ -5,8 +5,9 @@ import {
 } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
-import api from '../api/api';
-import PageLayout from '../components/Layout/PageLayout';
+import api from '../../services/api';
+import PageLayout from '../../components/Layout/Page/PageLayout';
+import styles from './Membros.styles';
 
 interface Membro {
   id: number;
@@ -85,7 +86,7 @@ export default function Membros() {
 
   return (
     <PageLayout title="Membros">
-      <Box display="flex" justifyContent="space-between" mb={2}>
+      <Box sx={styles.containerActions}>
         <Button variant="contained" onClick={() => setOpen(true)}>
           Novo Membro
         </Button>
@@ -109,7 +110,7 @@ export default function Membros() {
 
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>{form.id === 0 ? 'Novo Membro' : 'Editar Membro'}</DialogTitle>
-        <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+        <DialogContent sx={styles.dialogContent}>
           <TextField
             label="Nome"
             value={form.nome}

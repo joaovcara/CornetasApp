@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Paper, Typography, Box } from '@mui/material';
+import styles from './PageLayout.styles';
 
 interface PageLayoutProps {
   title: string;
@@ -8,12 +9,10 @@ interface PageLayoutProps {
 
 const PageLayout: React.FC<PageLayoutProps> = ({ title, children }) => {
   return (
-    <Container maxWidth={false} sx={{ py: 2 }}>
-      <Paper elevation={2} sx={{ borderRadius: 2, p: 2 }}>
-        <Box sx={{ borderBottom: '1px solid #eee', mb: 3, pb: 2 }}>
-          <Typography variant="h4" component="h1" sx={{
-            color: '#009d37ff'
-          }}>
+    <Container maxWidth={false} sx={styles.container}>
+      <Paper elevation={2} sx={styles.paper}>
+        <Box sx={styles.titleBox}>
+          <Typography variant="h4" component="h1" sx={styles.titleText}>
             {title}
           </Typography>
         </Box>

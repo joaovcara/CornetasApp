@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import Login from '../pages/Login';
-import Membros from '../pages/Membros';
-import MainLayout from '../components/Layout/MainLayout';
+import Login from '../pages/Login/Login';
+import Membros from '../pages/Membros/Membros';
 import ProtectedRoute from './ProtectedRoute';
+import MainLayout from '../components/Layout/Main/MainLayout';
 
 export default function AppRoutes() {
   return (

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { TextField, Button, Box, Typography, Container, Paper } from '@mui/material';
-import api from '../api/api';
+import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import styles from './Login.styles';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -20,23 +21,15 @@ export default function Login() {
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        backgroundColor: '#009d37ff',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        p: 2
-      }}
-    >
+    <Box sx={styles.root}>
       <Container maxWidth="sm">
-        <Paper elevation={3} sx={{ padding: 4 }}>
-          <Box sx={{ mb: 2, textAlign: 'center' }}>
-            <img
-              src="/img/icon.png" // Substitua pelo caminho correto da imagem
+        <Paper elevation={3} sx={styles.paper}>
+          <Box sx={styles.logoContainer}>
+            <Box
+              component="img"
+              src="/img/icon.png"
               alt="Logo"
-              style={{ width: '100px', height: 'auto' }}
+              sx={styles.logoImage}
             />
             <Typography variant="h5" gutterBottom align="center">
               Football Club App
@@ -47,7 +40,7 @@ export default function Login() {
             Login
           </Typography>
 
-          <Box display="flex" flexDirection="column" gap={2}>
+          <Box sx={styles.formContainer}>
             <TextField
               label="Email"
               type="email"
@@ -65,7 +58,7 @@ export default function Login() {
             />
 
             {erro && (
-              <Typography color="error" fontSize={14}>
+              <Typography sx={styles.errorText}>
                 {erro}
               </Typography>
             )}
