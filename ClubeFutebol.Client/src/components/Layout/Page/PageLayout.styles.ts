@@ -16,7 +16,10 @@ const styles: Record<string, SxProps<Theme>> = {
     pb: 2,
   },
   titleText: {
-    color: '#009d37ff',
+    color: theme => theme.palette.primary.main,
+  },
+  icon: {
+    color: theme => theme.palette.primary.main,
   },
 };
 

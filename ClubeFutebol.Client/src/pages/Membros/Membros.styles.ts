@@ -10,6 +10,7 @@ const styles: Record<string, SxProps<Theme>> = {
   dialogContent: {
     display: 'flex',
     flexDirection: 'column',
+    minWidth: 500,
     gap: 2,
     mt: 1,
   },

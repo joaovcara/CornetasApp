@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import {
   Button, Dialog, DialogActions, DialogContent, DialogTitle,
-  TextField, Box, IconButton
+  TextField
 } from '@mui/material';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { DataGrid } from '@mui/x-data-grid';
 import api from '../../services/api';
 import PageLayout from '../../components/Layout/Page/PageLayout';
 import styles from './Membros.styles';
+import GroupIcon from '@mui/icons-material/Group';
+
+import { getColumns } from './columns';
 
 interface Membro {
   id: number;
@@ -52,45 +54,10 @@ export default function Membros() {
     loadMembros();
   }, []);
 
-  const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 90, disableColumnMenu: true },
-    { field: 'nome', headerName: 'Nome', flex: 1, disableColumnMenu: true },
-    { field: 'email', headerName: 'Email', flex: 1, disableColumnMenu: true },
-    {
-      field: 'acoes',
-      headerName: '',
-      width: 100,
-      sortable: false,
-      filterable: false,
-      disableColumnMenu: true,
-      renderCell: (params) => (
-        <>
-          <IconButton
-            size="small"
-            onClick={() => handleEditar(params.row)}
-            aria-label="editar"
-          >
-            <EditIcon />
-          </IconButton>
-          <IconButton
-            size="small"
-            onClick={() => handleExcluir(params.row.id)}
-            aria-label="excluir"
-          >
-            <DeleteIcon />
-          </IconButton>
-        </>
-      ),
-    },
-  ];
+  const columns = getColumns(handleEditar, handleExcluir);
 
   return (
-    <PageLayout title="Membros">
-      <Box sx={styles.containerActions}>
-        <Button variant="contained" onClick={() => setOpen(true)}>
-          Novo Membro
-        </Button>
-      </Box>
+    <PageLayout title="Membros" onAddClick={() => setOpen(true)} icon={<GroupIcon />}>
       <DataGrid
         rows={membros}
         columns={columns}
