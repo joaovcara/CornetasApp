@@ -1,68 +1,92 @@
 import React from 'react';
 import {
-    Modal,
-    Box,
-    Typography,
-    IconButton,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
     Button,
-    Divider
+    Box,
+    IconButton,
+    Divider,
+    SxProps,
+    Theme,
+    DialogProps
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-interface TypeModalProps {
-    small: 200,
-    medium: 400,
-    large: 860
-}
+type ModalSize = 'small' | 'medium' | 'large';
 
-interface BaseModalProps {
+interface ModalBasicProps {
     open: boolean;
     title: string;
     onClose: () => void;
-    onAction?: () => void;
+    onSave?: () => void;
     children: React.ReactNode;
-    actionText?: string;
-    showFooter?: boolean;
-    type: keyof TypeModalProps;
+    showCancelButton?: boolean;
+    saveButtonText?: string;
+    cancelButtonText?: string;
+    customActions?: React.ReactNode;
+    size?: ModalSize;
 }
 
-export default function BaseModal({
+const sizeMap: Record<ModalSize, SxProps<Theme>> = {
+    small: { width: 400 },
+    medium: { width: 800 },
+    large: { width: 1200 },
+};
+
+export default function ModalBasic({
     open,
     title,
     onClose,
-    onAction,
+    onSave,
     children,
-    actionText = 'Confirmar',
-    showFooter = true,
-    type
-}: BaseModalProps) {
+    showCancelButton = true,
+    saveButtonText = 'Salvar',
+    cancelButtonText = 'Cancelar',
+    size = 'medium',
+}: ModalBasicProps) {
     return (
-        <Modal open={open} onClose={onClose}>
-            <Box width={type}>
-                {/* Header */}
-                <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                    <Typography variant="h6">{title}</Typography>
+        <Dialog
+            open={open}
+            onClose={onClose}
+            fullWidth
+            maxWidth={false}
+            slotProps={{
+                paper: {
+                    sx: sizeMap[size],
+                },
+            }}
+        >
+            <DialogTitle>
+                <Box display="flex" alignItems="center" justifyContent="space-between">
+                    {title}
                     <IconButton onClick={onClose} size="small">
                         <CloseIcon />
                     </IconButton>
                 </Box>
+            </DialogTitle>
 
-                <Divider />
+            <Divider />
 
-                {/* Container */}
-                <Box mt={2} mb={2}>
+            <DialogContent>
+                <Box display="flex" flexDirection="column" gap={2}>
                     {children}
                 </Box>
+            </DialogContent>
 
-                {/* Footer */}
-                {showFooter && (
-                    <Box display="flex" justifyContent="flex-end">
-                        <Button variant="contained" onClick={onAction}>
-                            {actionText}
-                        </Button>
-                    </Box>
+            <Divider />
+
+            <DialogActions>
+                {showCancelButton && (
+                    <Button onClick={onClose}>{cancelButtonText}</Button>
                 )}
-            </Box>
-        </Modal>
+                {onSave && (
+                    <Button onClick={onSave} variant="contained">
+                        {saveButtonText}
+                    </Button>
+                )}
+            </DialogActions>
+        </Dialog>
     );
-}
+};

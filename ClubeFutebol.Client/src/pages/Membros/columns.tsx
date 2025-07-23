@@ -1,5 +1,4 @@
 // membros.columns.ts
-import React from 'react';
 import { GridColDef } from '@mui/x-data-grid';
 import { IconButton } from '@mui/material';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
@@ -12,7 +11,7 @@ interface Membro {
 
 export const getColumns = (
   handleEditar: (membro: Membro) => void,
-  handleExcluir: (id: number) => void
+  handleExcluir: (membro: Membro) => void
 ): GridColDef[] => [
   { field: 'id', headerName: 'ID', width: 90, disableColumnMenu: true },
   { field: 'nome', headerName: 'Nome', flex: 1, disableColumnMenu: true },
@@ -35,7 +34,7 @@ export const getColumns = (
         </IconButton>
         <IconButton
           size="small"
-          onClick={() => handleExcluir(params.row.id)}
+          onClick={() => handleExcluir(params.row)}
           aria-label="excluir"
         >
           <DeleteIcon />
