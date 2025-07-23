@@ -1,15 +1,14 @@
 import { Button } from "@mui/material";
 
 interface Membro {
-    variant?: "text" | "outlined" | "contained";
     title: string;
     action: () => void;
 }
 
-export default function ButtonBasic({ variant = "contained", title, action }: Membro) {
+export default function ButtonBasic({ title, action }: Membro) {
     return (
         <Button
-            variant={variant}
+            variant='contained'
             color="primary"
             onClick={action}
         >

@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { TextField, Button, Box, Typography, Container, Paper } from '@mui/material';
+import { Button, Box, Typography, Container, Paper } from '@mui/material';
 import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.styles';
+import TextFieldBasic from '../../components/Basic/Text/TextField';
+import ButtonBasic from '../../components/Basic/Button/Button';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -41,15 +43,15 @@ export default function Login() {
           </Typography>
 
           <Box sx={styles.formContainer}>
-            <TextField
+            <TextFieldBasic
               label="Email"
-              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              type="email"
               fullWidth
             />
 
-            <TextField
+            <TextFieldBasic
               label="Senha"
               type="password"
               value={senha}
@@ -63,9 +65,7 @@ export default function Login() {
               </Typography>
             )}
 
-            <Button variant="contained" onClick={handleLogin}>
-              Entrar
-            </Button>
+            <ButtonBasic title='Entrar' action={handleLogin} />
           </Box>
         </Paper>
       </Container>
